@@ -4,7 +4,7 @@
 class NfsePrefeituraSp::Client
   def initialize(cert_path:, cert_password:)
     raise "[NfsePrefeituraSp] Certificate path missing" if !File.exist?(cert_path)
-    OpenSSL::Provider.load("legacy")
+    OpenSSL::Provider.load("legacy") if defined?(OpenSSL::Provider)
     @cert   = OpenSSL::PKCS12.new(File.read(cert_path), cert_password)
     @signer = NfsePrefeituraSp::Signer.new(@cert)
   end
@@ -38,7 +38,7 @@ class NfsePrefeituraSp::Client
     # puts response.full_hash[:envelope][:body][:envio_rps_response][:retorno_xml]
     # puts "=============== RESPONSE ===============\n\n\n\n\n"
 
-    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][:envio_rps_response][:retorno_xml], method: service.class::OPERATION_REQUEST)
+    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
   end
 
   private
