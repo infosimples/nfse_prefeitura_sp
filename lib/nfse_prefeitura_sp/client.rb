@@ -22,7 +22,6 @@ class NfsePrefeituraSp::Client
     # puts response.full_hash[:envelope][:body][:teste_envio_lote_rps_response][:retorno_xml]
     # puts "=============== RESPONSE ===============\n\n\n\n\n"
 
-    response
     NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
   end
 
@@ -39,8 +38,7 @@ class NfsePrefeituraSp::Client
     # puts response.full_hash[:envelope][:body][:envio_rps_response][:retorno_xml]
     # puts "=============== RESPONSE ===============\n\n\n\n\n"
 
-    response
-    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][:teste_envio_lote_rps_response][:retorno_xml], method: :teste_envio_lote_rps)
+    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][:envio_rps_response][:retorno_xml], method: service.class::OPERATION_REQUEST)
   end
 
   private

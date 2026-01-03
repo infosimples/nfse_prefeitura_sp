@@ -1,5 +1,5 @@
-# Based on https://github.com/iugu/nfe-paulistana
 # frozen_string_literal: true
+# Based on https://github.com/iugu/nfe-paulistana
 class NfsePrefeituraSp::Signer
   def initialize(cert)
     @cert = cert

@@ -1,7 +1,15 @@
 # NfsePrefeituraSp
 
+>WORK IN PROGRESS
+
 Gem para integração com a Nota Fiscal de Serviços Eletrônica (NFS-e) da Prefeitura de São Paulo.
-Emissão de Nota Fiscal de Serviço Eletrônica (NFS-e) na Prefeitura de São Paulo.
+
+**Esta gem se integra exclusivamente com a "Versão 2" dos serviços da Prefeitura, contemplando as mudanças introduzidas
+pela Reforma Triburtária de 2026 (IBS/CBS).**
+
+## Manuais da Prefeitura de São Paulo
+
+Os manuais técnicos disponibilizados pela Prefeitura de São Paulo estão disponíveis [aqui](https://notadomilhao.sf.prefeitura.sp.gov.br/manuais/).
 
 ## Módulos disponíveis
 
@@ -182,9 +190,9 @@ response = client.sync_teste_envio_lote_rps(data)
 # TODO: exemplo de resposta
 ```
 
-## Como usar
+### Exemplos de serviços assíncronos
 
-TODO: Write usage instructions here
+TODO
 
 ## Licença
 
