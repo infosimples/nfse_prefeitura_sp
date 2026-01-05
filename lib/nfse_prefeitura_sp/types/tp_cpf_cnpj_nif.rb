@@ -2,7 +2,7 @@
 class NfsePrefeituraSp::Types::TpCpfCnpjNif < NfsePrefeituraSp::Types::Complex
   def initialize_children
     @children[:cpf]     = NfsePrefeituraSp::Types::Simple.new('CPF', @data[:cpf])
-    @children[:cnpj]    = NfsePrefeituraSp::Types::Simple.new('CNPJ', @data[:cnp])
+    @children[:cnpj]    = NfsePrefeituraSp::Types::Simple.new('CNPJ', @data[:cnpj])
     @children[:nif]     = NfsePrefeituraSp::Types::Simple.new('NIF', @data[:nif])
     @children[:nao_nif] = NfsePrefeituraSp::Types::Simple.new('NaoNIF', @data[:nao_nif])
   end
