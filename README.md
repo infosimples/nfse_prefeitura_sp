@@ -97,7 +97,7 @@ data = {
       cpf_cnpj_tomador: {
         cnpj: '00000000000000',
       },
-      razao_tomador: 'Razão Social',
+      razao_social_tomador: 'Razão Social',
       ibs_cbs: {
         fin_nfse:  '0',
         ind_final: '0',
@@ -168,7 +168,7 @@ data = {
       cpf_cnpj_tomador: {
         cnpj: '00000000000000',
       },
-      razao_tomador: 'Razão Social',
+      razao_social_tomador: 'Razão Social',
       ibs_cbs: {
         fin_nfse:  '0',
         ind_final: '0',

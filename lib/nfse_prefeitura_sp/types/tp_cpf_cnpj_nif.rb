@@ -8,13 +8,13 @@ class NfsePrefeituraSp::Types::TpCpfCnpjNif < NfsePrefeituraSp::Types::Complex
   end
 
   def add_children_tags_to_xml(xml)
-    if !cpf.nil?
+    if !cpf.value.nil?
       cpf.add_tag_to_xml(xml)
-    elsif !cnpj.nil?
+    elsif !cnpj.value.nil?
       cnpj.add_tag_to_xml(xml)
-    elsif !nif.nil?
+    elsif !nif.value.nil?
       nif.add_tag_to_xml(xml)
-    elsif !nao_nif.nil?
+    elsif !nao_nif.value.nil?
       nao_nif.add_tag_to_xml(xml)
     end
   end
