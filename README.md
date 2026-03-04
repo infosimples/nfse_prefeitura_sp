@@ -168,6 +168,7 @@ data = {
       cpf_cnpj_tomador: {
         cnpj: '00000000000000',
       },
+      inscricao_municipal_tomador: '000000000000',
       razao_social_tomador: 'Razão Social',
       ibs_cbs: {
         fin_nfse:  '0',
