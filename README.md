@@ -25,7 +25,7 @@ Abaixo estão indicados os serviços já disponíveis (`[X]`) e os pendentes de 
   - `[ ] CONSULTA DE NF-E EMITIDAS`
   - `[ ] CONSULTA DE LOTE`
   - `[ ] CONSULTA INFORMAÇÕES DO LOTE`
-  - `[ ] CANCELAMENTO DE NF-E`
+  - `[X] CANCELAMENTO DE NF-E`
   - `[ ] CONSULTA DE CNPJ`
 
 ### Serviços assíncronos
@@ -42,6 +42,7 @@ Abaixo estão indicados os serviços já disponíveis (`[X]`) e os pendentes de 
 Criando um cliente:
 
 ```ruby
+require 'nfse_prefeitura_sp'
 client = NfsePrefeituraSp::Client.new(
   cert_path:    '/path/to/cert.p12',
   cert_password: 'passwd'
@@ -116,7 +117,13 @@ data = {
 }
 
 response = client.sync_envio_rps(data)
-# TODO: exemplo de resposta
+
+response.success?                                                    # true / false
+response.retorno[:chave_n_fe_rps][:chave_n_fe][:inscricao_prestador] # Inscrição do prestador de serviços
+response.retorno[:chave_n_fe_rps][:chave_n_fe][:numero_n_fe]         # Número da nota fiscal
+response.retorno[:chave_n_fe_rps][:chave_n_fe][:codigo_verificacao]  # Código de verificação
+response.retorno[:alerta]                                            # Alertas
+response.retorno[:erro]                                              # Erros
 ```
 
 TESTE DE ENVIO DE LOTE DE RPS:
@@ -189,6 +196,32 @@ data = {
 
 response = client.sync_teste_envio_lote_rps(data)
 # TODO: exemplo de resposta
+```
+
+CANCELAMENTO DE NF-E:
+
+```ruby
+data = {
+  cnpj_remetente: '00000000000000',
+  transacao: false,
+  detalhes: [
+    {
+      chave_nfe: {
+        inscricao_prestador: '00000000',
+        numero_nfe:          '000000000000',
+        # codigo_verificacao:  '000000',
+        # chave_nota_nacional: '000000', 
+      }
+    }
+  ],
+}
+
+response = client.sync_cancelamento_nfe(data)
+
+response.success?         # true / false
+response.retorno          # Hash
+response.retorno[:alerta] # Alertas
+response.retorno[:erro]   # Erros
 ```
 
 ### Exemplos de serviços assíncronos

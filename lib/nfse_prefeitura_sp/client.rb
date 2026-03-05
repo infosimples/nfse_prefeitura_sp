@@ -9,41 +9,41 @@ class NfsePrefeituraSp::Client
     @signer = NfsePrefeituraSp::Signer.new(@cert)
   end
 
+  # TESTE DE ENVIO DE LOTE DE RPS
   def sync_teste_envio_lote_rps(data)
-    service     = NfsePrefeituraSp::Services::Sync::TesteEnvioLoteRPS.new(data, @signer)
-    soap_client = soap_client(:sync)
-    message     = service.request_xml
-    # request     = soap_client.build_request(service.class::OPERATION_REQUEST, message: message, attributes:{ xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
-    response    = soap_client.call(service.class::OPERATION_REQUEST, message: message, attributes: { xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
-    # puts "\n\n\n\n\n=============== REQUEST ==============="
-    # puts request.body
-    # puts "=============== REQUEST ===============\n\n\n\n\n"
-    # puts "=============== RESPONSE ==============="
-    # puts response.full_hash[:envelope][:body][:teste_envio_lote_rps_response][:retorno_xml]
-    # puts "=============== RESPONSE ===============\n\n\n\n\n"
-
-    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
+    call_service(NfsePrefeituraSp::Services::Sync::TesteEnvioLoteRPS.new(data, @signer))
   end
 
+  # ENVIO DE RPS
   def sync_envio_rps(data)
-    service     = NfsePrefeituraSp::Services::Sync::EnvioRps.new(data, @signer)
-    soap_client = soap_client(:sync)
-    message     = service.request_xml
-    # request     = soap_client.build_request(service.class::OPERATION_REQUEST, message: message, attributes:{ xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
-    response    = soap_client.call(service.class::OPERATION_REQUEST, message: message, attributes: { xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
-    # puts "\n\n\n\n\n=============== REQUEST ==============="
-    # puts request.body
-    # puts "=============== REQUEST ===============\n\n\n\n\n"
-    # puts "=============== RESPONSE ==============="
-    # puts response.full_hash[:envelope][:body][:envio_rps_response][:retorno_xml]
-    # puts "=============== RESPONSE ===============\n\n\n\n\n"
+    call_service(NfsePrefeituraSp::Services::Sync::EnvioRps.new(data, @signer))
+  end
 
-    NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
+  # CANCELAMENTO DE NF-E
+  def sync_cancelamento_nfe(data)
+    call_service(NfsePrefeituraSp::Services::Sync::CancelamentoNfe.new(data, @signer))
   end
 
   private
 
-    def soap_client(interface)
+    def call_service(service)
+      soap_client = new_soap_client(:sync)
+      message     = service.request_xml
+      
+      # request = soap_client.build_request(service.class::OPERATION_REQUEST, message: message, attributes:{ xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
+      # puts "\n\n\n\n\n=============== REQUEST ==============="
+      # puts request.body
+      # puts "=============== REQUEST ===============\n\n\n\n\n"
+
+      response = soap_client.call(service.class::OPERATION_REQUEST, message: message, attributes: { xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
+      # puts "=============== RESPONSE ==============="
+      # puts response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml]
+      # puts "=============== RESPONSE ===============\n\n\n\n\n"
+      
+      NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
+    end
+
+    def new_soap_client(interface)
       wsdl = case interface
       when :sync
         NfsePrefeituraSp::Services::Sync::WSDL_URL
@@ -65,5 +65,4 @@ class NfsePrefeituraSp::Client
         read_timeout:         300,
       )
     end
-
 end
