@@ -29,7 +29,7 @@ class NfsePrefeituraSp::Client
     def call_service(service)
       soap_client = new_soap_client(:sync)
       message     = service.request_xml
-      
+
       # request = soap_client.build_request(service.class::OPERATION_REQUEST, message: message, attributes:{ xmlns: 'http://www.prefeitura.sp.gov.br/nfe' })
       # puts "\n\n\n\n\n=============== REQUEST ==============="
       # puts request.body
@@ -39,7 +39,7 @@ class NfsePrefeituraSp::Client
       # puts "=============== RESPONSE ==============="
       # puts response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml]
       # puts "=============== RESPONSE ===============\n\n\n\n\n"
-      
+
       NfsePrefeituraSp::Response.new(xml: response.full_hash[:envelope][:body][service.class::OPERATION_RESPONSE][:retorno_xml], method: service.class::OPERATION_REQUEST)
     end
 

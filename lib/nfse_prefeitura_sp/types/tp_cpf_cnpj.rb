@@ -2,7 +2,7 @@
 class NfsePrefeituraSp::Types::TpCpfCnpj < NfsePrefeituraSp::Types::Complex
   def initialize_children
     @children[:cpf]  = NfsePrefeituraSp::Types::Simple.new('CPF', @data[:cpf])
-    @children[:cnpj] = NfsePrefeituraSp::Types::Simple.new('CNPJ', @data[:cnp])
+    @children[:cnpj] = NfsePrefeituraSp::Types::Simple.new('CNPJ', @data[:cnpj])
   end
 
   def add_children_tags_to_xml(xml)
