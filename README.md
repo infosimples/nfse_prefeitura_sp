@@ -79,6 +79,7 @@ data = {
       valor_inss:                     'XX.XX',
       valor_ir:                       'XX.XX',
       valor_csll:                     'XX.XX',
+      retencao_pis_cofins:            '0',
       exigibilidade_suspensa:         '0',
       pagamento_parcelado_antecipado: '0',
       nbs:                            '000000000',
@@ -210,7 +211,7 @@ data = {
         inscricao_prestador: '00000000',
         numero_nfe:          '000000000000',
         # codigo_verificacao:  '000000',
-        # chave_nota_nacional: '000000', 
+        # chave_nota_nacional: '000000',
       }
     }
   ],

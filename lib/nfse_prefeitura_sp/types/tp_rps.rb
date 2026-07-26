@@ -33,6 +33,7 @@ class NfsePrefeituraSp::Types::TpRps < NfsePrefeituraSp::Types::Complex
     @children[:matricula_obra]                    = NfsePrefeituraSp::Types::Simple.new('MatriculaObra', @data[:matricula_obra])
     @children[:municipio_prestacao]               = NfsePrefeituraSp::Types::Simple.new('MunicipioPrestacao', @data[:municipio_prestacao])
     @children[:valor_total_recebido]              = NfsePrefeituraSp::Types::Simple.new('ValorTotalRecebido', @data[:valor_total_recebido])
+    @children[:retencao_pis_cofins]               = NfsePrefeituraSp::Types::Simple.new('RetencaoPisCofins', @data[:retencao_pis_cofins])
     @children[:numero_encapsulamento]             = NfsePrefeituraSp::Types::Simple.new('NumeroEncapsulamento', @data[:numero_encapsulamento])
     @children[:valor_inicial_cobrado]             = NfsePrefeituraSp::Types::Simple.new('ValorInicialCobrado', @data[:valor_inicial_cobrado])
     @children[:valor_final_cobrado]               = NfsePrefeituraSp::Types::Simple.new('ValorFinalCobrado', @data[:valor_final_cobrado])
@@ -40,15 +41,16 @@ class NfsePrefeituraSp::Types::TpRps < NfsePrefeituraSp::Types::Complex
     @children[:valor_juros]                       = NfsePrefeituraSp::Types::Simple.new('ValorJuros', @data[:valor_juros])
     @children[:valor_ipi]                         = NfsePrefeituraSp::Types::Simple.new('ValorIPI', @data[:valor_ipi])
     @children[:exigibilidade_suspensa]            = NfsePrefeituraSp::Types::Simple.new('ExigibilidadeSuspensa', @data[:exigibilidade_suspensa])
-    # Versão 3.3.6 - 14/05/2026
-    # O campo PagamentoParceladoAntecipado não será mais utilizado e os valores enviados serão desconsiderados.
-    # @children[:pagamento_parcelado_antecipado]    = NfsePrefeituraSp::Types::Simple.new('PagamentoParceladoAntecipado', @data[:pagamento_parcelado_antecipado])
     @children[:ncm]                               = NfsePrefeituraSp::Types::Simple.new('NCM', @data[:ncm])
     @children[:nbs]                               = NfsePrefeituraSp::Types::Simple.new('NBS', @data[:nbs])
     @children[:c_loc_prestacao]                   = NfsePrefeituraSp::Types::Simple.new('cLocPrestacao', @data[:c_loc_prestacao])
     @children[:c_pais_prestacao]                  = NfsePrefeituraSp::Types::Simple.new('cPaisPrestacao', @data[:c_pais_prestacao])
     @children[:ibs_cbs]                           = NfsePrefeituraSp::Types::TpIbsCbs.new('IBSCBS', @data[:ibs_cbs])
     @children[:assinatura]                        = NfsePrefeituraSp::Types::Simple.new('Assinatura', generate_signature)
+
+    # Versão 3.3.6 - 14/05/2026
+    # O campo PagamentoParceladoAntecipado não será mais utilizado e os valores enviados serão desconsiderados.
+    # @children[:pagamento_parcelado_antecipado]    = NfsePrefeituraSp::Types::Simple.new('PagamentoParceladoAntecipado', @data[:pagamento_parcelado_antecipado])
   end
 
   def add_children_tags_to_xml(xml)
@@ -85,6 +87,7 @@ class NfsePrefeituraSp::Types::TpRps < NfsePrefeituraSp::Types::Complex
     matricula_obra.add_tag_to_xml(xml)
     municipio_prestacao.add_tag_to_xml(xml)
     valor_total_recebido.add_tag_to_xml(xml)
+    retencao_pis_cofins.add_tag_to_xml(xml)
     numero_encapsulamento.add_tag_to_xml(xml)
 
     if !valor_inicial_cobrado.value.nil?
@@ -97,7 +100,7 @@ class NfsePrefeituraSp::Types::TpRps < NfsePrefeituraSp::Types::Complex
     valor_juros.add_tag_to_xml(xml)
     valor_ipi.add_tag_to_xml(xml)
     exigibilidade_suspensa.add_tag_to_xml(xml)
-    pagamento_parcelado_antecipado.add_tag_to_xml(xml)
+    # pagamento_parcelado_antecipado.add_tag_to_xml(xml) # Ver nota acima (Versão 3.3.6 - 14/05/2026).
     ncm.add_tag_to_xml(xml)
     nbs.add_tag_to_xml(xml)
 
