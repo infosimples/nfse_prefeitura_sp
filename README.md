@@ -26,7 +26,7 @@ Abaixo estão indicados os serviços já disponíveis (`[X]`) e os pendentes de 
   - `[ ] CONSULTA DE LOTE`
   - `[ ] CONSULTA INFORMAÇÕES DO LOTE`
   - `[X] CANCELAMENTO DE NF-E`
-  - `[ ] CONSULTA DE CNPJ`
+  - `[X] CONSULTA DE CNPJ`
 
 ### Serviços assíncronos
 
@@ -223,6 +223,23 @@ response.success?         # true / false
 response.retorno          # Hash
 response.retorno[:alerta] # Alertas
 response.retorno[:erro]   # Erros
+```
+
+CONSULTA DE CNPJ:
+
+```ruby
+data = {
+  cnpj_remetente:    '00000000000000',
+  cnpj_contribuinte: '00000000000000',
+}
+
+response = client.sync_consulta_cnpj(data)
+
+response.success?                                # true / false
+response.retorno[:detalhe][:inscricao_municipal] # Inscrição municipal
+response.retorno[:detalhe][:emite_n_fe]          # Emite NF-e (true/false)
+response.retorno[:alerta]                        # Alertas
+response.retorno[:erro]                          # Erros
 ```
 
 ### Exemplos de serviços assíncronos

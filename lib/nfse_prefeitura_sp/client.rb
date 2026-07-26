@@ -24,6 +24,11 @@ class NfsePrefeituraSp::Client
     call_service(NfsePrefeituraSp::Services::Sync::CancelamentoNfe.new(data, @signer))
   end
 
+  # CONSULTA DE CNPJ
+  def sync_consulta_cnpj(data)
+    call_service(NfsePrefeituraSp::Services::Sync::ConsultaCnpj.new(data, @signer))
+  end
+
   private
 
     def call_service(service)
