@@ -58,16 +58,18 @@ class NfsePrefeituraSp::Client
         raise "[NfsePrefeituraSp] Unknown interface `#{interface}`."
       end
 
-      Savon.client(
+      client = Savon.client(
         env_namespace:        :soap,
         soap_version:         2,
-        ssl_verify_mode:      :peer,
-        ssl_cert:             @cert.certificate,
-        ssl_cert_key:         @cert.key,
+        transport:            :faraday,
         wsdl:                 wsdl,
         namespace_identifier: nil,
-        open_timeout:         300,
-        read_timeout:         300,
       )
+      client.faraday.ssl.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      client.faraday.ssl.client_cert = @cert.certificate
+      client.faraday.ssl.client_key  = @cert.key
+      client.faraday.options.open_timeout = 300
+      client.faraday.options.read_timeout = 300
+      client
     end
 end
