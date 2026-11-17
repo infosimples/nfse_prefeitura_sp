@@ -61,7 +61,7 @@ class NfsePrefeituraSp::Client
       Savon.client(
         env_namespace:        :soap,
         soap_version:         2,
-        ssl_verify_mode:      OpenSSL::SSL::VERIFY_PEER,
+        ssl_verify_mode:      :peer,
         ssl_cert:             @cert.certificate,
         ssl_cert_key:         @cert.key,
         wsdl:                 wsdl,

@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "openssl", ">= 3.3", "< 5.0"
+  spec.add_dependency "openssl", ">= 3.2", "< 5.0"
   spec.add_dependency "nokogiri", "~> 1.18"
-  spec.add_dependency "savon", "~> 3.0.0.rc2"
+  spec.add_dependency "savon", "~> 2.18"
 end
